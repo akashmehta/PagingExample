@@ -1,0 +1,13 @@
+ext {
+    android = [
+            buildToolsVersion: "28.0.3",
+            minSdkVersion    : 21,
+            targetSdkVersion : 28,
+            compileSdkVersion: 28
+    ]
+    endpoints = [
+            devEnv : "\"https://api.github.com/\"",
+            stagEnv: "\"https://api.github.com/\"",
+            prodEnv: "\"https://api.github.com/\""
+    ]
+}

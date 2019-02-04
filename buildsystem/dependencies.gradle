@@ -1,0 +1,64 @@
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+ext {
+    supportLib = '1.0.0'
+    room = '2.1.0-alpha01'
+    paging = '2.1.0-alpha01'
+    rxBinding = '3.0.0-alpha2'
+    okHttp = '3.11.0'
+    retrofit = '2.4.0'
+    chuck = '1.1.0'
+    glide = '4.7.1'
+    dagger = '2.17'
+    anko = '0.10.4'
+    lifecycleComponent = '2.0.0'
+    runnerVersion = '1.1.0-alpha4'
+    rulesVersion = "1.0.1"
+    junitVersion = "4.12"
+    espressoVersion = '3.1.0-beta02'
+    commonDependencies = [
+            // appcompat
+            appcompat         : "androidx.appcompat:appcompat:${supportLib}",
+
+            // rxbinding
+            rxBinding         : "com.jakewharton.rxbinding3:rxbinding-core:${rxBinding}",
+
+            // retrofit
+            retrofit          : "com.squareup.retrofit2:retrofit:${retrofit}",
+            retrofitGson      : "com.squareup.retrofit2:converter-gson:${retrofit}",
+            retrofitRxAdapter : "com.squareup.retrofit2:adapter-rxjava2:${retrofit}",
+            retrofitConverterJackson : "com.squareup.retrofit2:converter-jackson:${retrofit}",
+            okHttpLogging     : "com.squareup.okhttp3:logging-interceptor:${okHttp}",
+
+            // chuck
+            chuckDebug        : "com.readystatesoftware.chuck:library:${chuck}",
+            chuckRelease      : "com.readystatesoftware.chuck:library-no-op:${chuck}",
+
+            // dagger
+            dagger            : "com.google.dagger:dagger:${dagger}",
+            daggerCompiler    : "com.google.dagger:dagger-compiler:${dagger}",
+
+            // anko
+            kotlinAnko        : "org.jetbrains.anko:anko-commons:${anko}",
+
+            // life cycle component
+            lcExtentions      : "androidx.lifecycle:lifecycle-extensions:${lifecycleComponent}",
+            lcCompiler        : "androidx.lifecycle:lifecycle-runtime:${lifecycleComponent}",
+            roomRuntime       : "androidx.room:room-runtime:${room}",
+            roomCompiler      : "androidx.room:room-compiler:${room}",
+
+            // paging library
+            paging            : "androidx.paging:paging-runtime:${paging}",
+
+            // testing
+            junit             : "junit:junit:$junitVersion",
+            testRunner        : "androidx.test:runner:$runnerVersion",
+            espressoCore      : "androidx.test.espresso:espresso-core:$espressoVersion"
+    ]
+
+}
