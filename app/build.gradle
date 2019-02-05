@@ -1,11 +1,8 @@
+
 apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-
 
 android {
     def androidVersions = rootProject.ext.android
@@ -16,9 +13,13 @@ android {
         applicationId "aakash.com.pagingexample"
         minSdkVersion androidVersions.minSdkVersion
         targetSdkVersion androidVersions.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        def versionMajor = 1 // For Major Features
+        def versionMinor = 0 // For Minor Features
+        def versionPatch = 0 // For Bug Fixing and Patch
+
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -44,19 +45,19 @@ dependencies {
 
     implementation commonDependencies.okHttpLogging
 
-    debugImplementation commonDependencies.chuckDebug
-    releaseImplementation commonDependencies.chuckRelease
-
     implementation commonDependencies.dagger
     kapt commonDependencies.daggerCompiler
 
     implementation commonDependencies.lcExtentions
+    implementation commonDependencies.lcRuntime
     kapt commonDependencies.lcCompiler
 
     implementation commonDependencies.roomRuntime
+    implementation commonDependencies.rxRoom
     kapt commonDependencies.roomCompiler
 
     implementation commonDependencies.paging
-    implementation commonDependencies.kotlinAnko
     implementation commonDependencies.rxBinding
+    implementation commonDependencies.design
+    implementation commonDependencies.rxkotlin
 }

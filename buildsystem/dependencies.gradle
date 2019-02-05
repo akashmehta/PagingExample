@@ -9,18 +9,18 @@ ext {
     supportLib = '1.0.0'
     room = '2.1.0-alpha01'
     paging = '2.1.0-alpha01'
+    rxKotlin = '2.3.0'
     rxBinding = '3.0.0-alpha2'
     okHttp = '3.11.0'
     retrofit = '2.4.0'
-    chuck = '1.1.0'
-    glide = '4.7.1'
     dagger = '2.17'
-    anko = '0.10.4'
     lifecycleComponent = '2.0.0'
     runnerVersion = '1.1.0-alpha4'
     rulesVersion = "1.0.1"
     junitVersion = "4.12"
     espressoVersion = '3.1.0-beta02'
+    design = '1.0.0-rc01'
+    rxkotlin = "2.3.0"
     commonDependencies = [
             // appcompat
             appcompat         : "androidx.appcompat:appcompat:${supportLib}",
@@ -35,26 +35,23 @@ ext {
             retrofitConverterJackson : "com.squareup.retrofit2:converter-jackson:${retrofit}",
             okHttpLogging     : "com.squareup.okhttp3:logging-interceptor:${okHttp}",
 
-            // chuck
-            chuckDebug        : "com.readystatesoftware.chuck:library:${chuck}",
-            chuckRelease      : "com.readystatesoftware.chuck:library-no-op:${chuck}",
-
             // dagger
             dagger            : "com.google.dagger:dagger:${dagger}",
             daggerCompiler    : "com.google.dagger:dagger-compiler:${dagger}",
 
-            // anko
-            kotlinAnko        : "org.jetbrains.anko:anko-commons:${anko}",
-
             // life cycle component
             lcExtentions      : "androidx.lifecycle:lifecycle-extensions:${lifecycleComponent}",
-            lcCompiler        : "androidx.lifecycle:lifecycle-runtime:${lifecycleComponent}",
+            lcRuntime         : "androidx.lifecycle:lifecycle-runtime:${lifecycleComponent}",
+            lcCompiler        : "androidx.lifecycle:lifecycle-compiler:${lifecycleComponent}",
             roomRuntime       : "androidx.room:room-runtime:${room}",
+            rxRoom            : "androidx.room:room-rxjava2:${room}",
             roomCompiler      : "androidx.room:room-compiler:${room}",
 
             // paging library
             paging            : "androidx.paging:paging-runtime:${paging}",
 
+            design            : "com.google.android.material:material:$design",
+            rxkotlin          : "io.reactivex.rxjava2:rxkotlin:$rxkotlin",
             // testing
             junit             : "junit:junit:$junitVersion",
             testRunner        : "androidx.test:runner:$runnerVersion",
