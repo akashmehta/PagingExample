@@ -16,31 +16,26 @@
 
 package aakash.com.pagingexample.db
 
+import aakash.com.pagingexample.ui.repos.model.Repo
 import android.util.Log
 import androidx.paging.DataSource
-import aakash.com.pagingexample.ui.repos.model.Repo
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
+import java.util.concurrent.Executors
 
 /**
  * Class that handles the DAO local data source. This ensures that methods are triggered on the
  * correct executor.
  */
-class GithubLocalCache(private val repoDao: RepoDao,
-                       private val mCompositeDisposable: CompositeDisposable) {
+class GithubLocalCache(private val repoDao: RepoDao) {
 
     /**
      * Insert a list of repos in the database, on a background thread.
      */
     fun insert(repos: List<Repo>, insertFinished: () -> Unit) {
-        Log.d("GithubLocalCache", "inserting ${repos.size} repos")
-        repoDao.insert(repos).subscribe(
-            {
-                insertFinished()
-            },{
-                it.printStackTrace()
-            }
-        ).addTo(mCompositeDisposable)
+        Executors.newSingleThreadExecutor().execute {
+            Log.d("GithubLocalCache", "inserting ${repos.size} repos")
+            repoDao.insert(repos)
+            insertFinished()
+        }
     }
 
     /**

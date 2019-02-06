@@ -1,9 +1,9 @@
 package aakash.com.pagingexample.injection.component
 
-import aakash.com.pagingexample.ui.repos.view.MainActivity
 import aakash.com.pagingexample.injection.module.NetworkModule
 import dagger.Component
 import aakash.com.pagingexample.injection.module.ViewModelModule
+import aakash.com.pagingexample.ui.repos.view.SearchRepositoriesActivity
 import javax.inject.Singleton
 
 /**
@@ -15,5 +15,5 @@ import javax.inject.Singleton
     ViewModelModule::class
 ])
 interface AppComponent {
-    fun inject(activity: MainActivity)
+    fun inject(activity: SearchRepositoriesActivity)
 }

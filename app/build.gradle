@@ -53,11 +53,15 @@ dependencies {
     kapt commonDependencies.lcCompiler
 
     implementation commonDependencies.roomRuntime
-    implementation commonDependencies.rxRoom
     kapt commonDependencies.roomCompiler
 
     implementation commonDependencies.paging
     implementation commonDependencies.rxBinding
     implementation commonDependencies.design
     implementation commonDependencies.rxkotlin
+
+    implementation commonDependencies.material
+    implementation commonDependencies.constraintLayout
+
+
 }

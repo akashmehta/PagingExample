@@ -27,7 +27,7 @@ class UserRepo @Inject constructor(private val mApi: ApiEndPoints) {
      */
     private fun provideCache(context: Context): GithubLocalCache {
         val database = RepoDatabase.getInstance(context)
-        return GithubLocalCache(database.reposDao(), mCompositeDisposable)
+        return GithubLocalCache(database.reposDao())
     }
 
     /**

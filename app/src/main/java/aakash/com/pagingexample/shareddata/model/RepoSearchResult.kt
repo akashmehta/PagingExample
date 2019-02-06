@@ -26,6 +26,6 @@ import androidx.paging.PagedList
  * and a LiveData<String> of network error state.
  */
 data class RepoSearchResult(
-    val data: LiveData<PagedList<Repo>> = MutableLiveData(),
+    val data: LiveData<PagedList<Repo>> = MutableLiveData<PagedList<Repo>>(),
     val networkErrors: LiveData<String> = MutableLiveData()
 )

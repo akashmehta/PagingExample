@@ -31,7 +31,7 @@ import io.reactivex.Completable
 interface RepoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(posts: List<Repo>) : Completable
+    fun insert(posts: List<Repo>)
 
     // Do a similar query as the search API:
     // Look for repos that contain the query string in the name or in the description
