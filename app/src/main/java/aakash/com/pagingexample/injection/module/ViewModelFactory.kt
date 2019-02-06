@@ -4,7 +4,7 @@ import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
-import aakash.com.pagingexample.ui.users.view.UserViewModel
+import aakash.com.pagingexample.ui.repos.view.UserViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject

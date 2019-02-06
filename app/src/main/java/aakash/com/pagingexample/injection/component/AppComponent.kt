@@ -1,6 +1,6 @@
 package aakash.com.pagingexample.injection.component
 
-import aakash.com.pagingexample.MainActivity
+import aakash.com.pagingexample.ui.repos.view.MainActivity
 import aakash.com.pagingexample.injection.module.NetworkModule
 import dagger.Component
 import aakash.com.pagingexample.injection.module.ViewModelModule
