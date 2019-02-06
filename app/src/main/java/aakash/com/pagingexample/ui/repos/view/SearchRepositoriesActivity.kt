@@ -32,7 +32,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_search_repositories.*
 import javax.inject.Inject
 
@@ -41,7 +41,6 @@ class SearchRepositoriesActivity : AppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var viewModel: UserViewModel
-    private val adapter = ReposAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,10 +49,6 @@ class SearchRepositoriesActivity : AppCompatActivity() {
         // get the view model
         viewModel = ViewModelProviders.of(this, viewModelFactory)[UserViewModel::class.java]
         viewModel.initCache(this)
-
-        // add dividers between RecyclerView's row items
-        val decoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        list.addItemDecoration(decoration)
 
         initAdapter()
         val query = savedInstanceState?.getString(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
@@ -67,11 +62,12 @@ class SearchRepositoriesActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-        list.adapter = adapter
+        list.layoutManager = LinearLayoutManager(this)
+        list.adapter = ReposAdapter(list.layoutManager as LinearLayoutManager)
         viewModel.repos.observe(this, Observer<PagedList<Repo>> {
             Log.d("Activity", "list: ${it?.size}")
             showEmptyList(it?.size == 0)
-            adapter.submitList(it)
+            (list.adapter as ReposAdapter).submitList(it)
         })
         viewModel.networkErrors.observe(this, Observer<String> {
             Toast.makeText(this, "\uD83D\uDE28 Wooops $it", Toast.LENGTH_LONG).show()
@@ -104,7 +100,7 @@ class SearchRepositoriesActivity : AppCompatActivity() {
             if (it.isNotEmpty()) {
                 list.scrollToPosition(0)
                 viewModel.searchRepo(it.toString())
-                adapter.submitList(null)
+                (list.adapter as ReposAdapter).submitList(null)
             }
         }
     }

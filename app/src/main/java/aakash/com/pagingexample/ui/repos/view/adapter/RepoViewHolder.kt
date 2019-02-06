@@ -17,19 +17,19 @@
 package aakash.com.pagingexample.ui.repos.view.adapter
 
 import aakash.com.pagingexample.R
+import aakash.com.pagingexample.common.extension.isVisible
 import aakash.com.pagingexample.ui.repos.model.Repo
-import android.content.Intent
-import android.net.Uri
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * View Holder for a [Repo] RecyclerView list item.
  */
-class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class RepoViewHolder(view: View, layoutManager: LinearLayoutManager, notifyAdapter:(position: Int) -> Unit) : RecyclerView.ViewHolder(view) {
     private val name: TextView = view.findViewById(R.id.repo_name)
     private val description: TextView = view.findViewById(R.id.repo_description)
     private val stars: TextView = view.findViewById(R.id.repo_stars)
@@ -39,10 +39,10 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private var repo: Repo? = null
 
     init {
-        view.setOnClickListener {
-            repo?.url?.let { url ->
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                view.context.startActivity(intent)
+        view.setOnClickListener {_->
+            repo?.let {
+                it.isExpanded = !(it.isExpanded)
+                notifyAdapter(adapterPosition)
             }
         }
     }
@@ -65,12 +65,12 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         name.text = repo.fullName
 
         // if the description is missing, hide the TextView
-        var descriptionVisibility = View.GONE
+        var descriptionVisibility = false
         if (repo.description != null) {
             description.text = repo.description
-            descriptionVisibility = View.VISIBLE
+            descriptionVisibility = true
         }
-        description.visibility = descriptionVisibility
+        description.visibility = (descriptionVisibility && repo.isExpanded).isVisible()
 
         stars.text = repo.stars.toString()
         forks.text = repo.forks.toString()
@@ -86,10 +86,10 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     companion object {
-        fun create(parent: ViewGroup): RepoViewHolder {
+        fun create(parent: ViewGroup, layoutManager: LinearLayoutManager, notifyAdapter:(position: Int) -> Unit): RepoViewHolder {
             val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.repo_view_item, parent, false)
-            return RepoViewHolder(view)
+            return RepoViewHolder(view, layoutManager, notifyAdapter)
         }
     }
 }

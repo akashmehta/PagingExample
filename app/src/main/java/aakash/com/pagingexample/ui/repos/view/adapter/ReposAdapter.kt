@@ -20,15 +20,19 @@ import aakash.com.pagingexample.ui.repos.model.Repo
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Adapter for the list of repositories.
  */
-class ReposAdapter : PagedListAdapter<Repo, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
+class ReposAdapter(private val layoutManager: LinearLayoutManager)
+    : PagedListAdapter<Repo, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return RepoViewHolder.create(parent)
+        return RepoViewHolder.create(parent, layoutManager){
+            notifyItemChanged(it)
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
