@@ -1,9 +1,9 @@
-package aakash.com.pagingexample.ui.repos.view
+package aakash.com.pagingexample.ui.repos.model
 
 import aakash.com.pagingexample.shareddata.model.RepoSearchResult
-import aakash.com.pagingexample.ui.repos.model.Repo
 import aakash.com.pagingexample.ui.repos.repo.UserRepo
 import android.content.Context
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -14,12 +14,13 @@ import javax.inject.Inject
 /**
  * Created by stllpt031 on 28/8/18.
  */
-class UserViewModel @Inject constructor(private val mUserRepo: UserRepo) : ViewModel() {
+open class UserViewModel @Inject constructor(private val mUserRepo: UserRepo) : ViewModel() {
     fun initCache(context: Context) {
         mUserRepo.initCache(context)
     }
 
-    private val queryLiveData = MutableLiveData<String>()
+    @VisibleForTesting
+    var queryLiveData = MutableLiveData<String>()
     private val repoResult: LiveData<RepoSearchResult> = Transformations.map(queryLiveData) {
         mUserRepo.search(it)
     }

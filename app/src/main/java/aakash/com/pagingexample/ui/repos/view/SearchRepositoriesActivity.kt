@@ -19,6 +19,7 @@ package aakash.com.pagingexample.ui.repos.view
 import aakash.com.pagingexample.AppApplication
 import aakash.com.pagingexample.R
 import aakash.com.pagingexample.ui.repos.model.Repo
+import aakash.com.pagingexample.ui.repos.model.UserViewModel
 import aakash.com.pagingexample.ui.repos.view.adapter.ReposAdapter
 import android.os.Bundle
 import android.util.Log

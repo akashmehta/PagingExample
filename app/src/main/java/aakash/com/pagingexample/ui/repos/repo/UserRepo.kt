@@ -14,7 +14,7 @@ import javax.inject.Inject
 /**
  * Created by stllpt031 on 28/8/18.
  */
-class UserRepo @Inject constructor(private val mApi: ApiEndPoints) {
+open class UserRepo @Inject constructor(private val mApi: ApiEndPoints) {
     val mCompositeDisposable = CompositeDisposable()
     private lateinit var cache: GithubLocalCache
 
